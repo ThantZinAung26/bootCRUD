@@ -8,34 +8,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     @NotEmpty(message = "Please provide a name")
     private String name;
     @Author
     @NotEmpty(message = "Please provide a author")
     private String author;
-    @NotEmpty(message = "Please provide a price")
+    @NotNull(message = "Please provide a price")
     @DecimalMin("1.00")
     private BigDecimal price;
 
     public Book() {
     }
 
-    public Book(Long id, @NotEmpty(message = "Please provide a name") String name, @NotEmpty(message = "Please provide a author") String author, @NotEmpty(message = "Please provide a price") @DecimalMin("1.00") BigDecimal price) {
+    public Book(Long id, String name, String author, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.price = price;
     }
 
-    public Book(@NotEmpty(message = "Please provide a name") String name, @NotEmpty(message = "Please provide a author") String author, @NotEmpty(message = "Please provide a price") @DecimalMin("1.00") BigDecimal price) {
+    public Book(String name, String author, BigDecimal price) {
         this.name = name;
         this.author = author;
         this.price = price;
@@ -71,5 +72,15 @@ public class Book {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

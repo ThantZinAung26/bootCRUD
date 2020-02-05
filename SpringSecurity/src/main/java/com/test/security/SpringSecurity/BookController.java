@@ -15,6 +15,7 @@ import java.util.Map;
 @Validated
 public class BookController {
 
+
     private final BookRepository repository;
 
     public BookController(BookRepository repository) {

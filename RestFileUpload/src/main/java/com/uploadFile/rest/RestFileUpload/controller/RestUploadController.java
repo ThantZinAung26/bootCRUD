@@ -23,7 +23,7 @@ public class RestUploadController {
 
 	private final Logger logger = LoggerFactory.getLogger(RestController.class);
 	private final String UPLOAD_FOLDER = "C:\\Users\\opmyanmar\\upload";
-	
+
 	@GetMapping("/api/all")
 	public String getAll() {
 		return "Page";
@@ -31,21 +31,31 @@ public class RestUploadController {
 
 	@PostMapping("/api/upload")
 	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile multipartFile) {
+		
 		logger.debug("Single file upload!");
+		
 		if (multipartFile.isEmpty()) {
 			return new ResponseEntity<Object>("Please select file.", HttpStatus.OK);
 		}
+		
 		try {
 			writeFile(Arrays.asList(multipartFile));
 		} catch (IOException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>("Success file upload " + multipartFile.getOriginalFilename(),
-				new HttpHeaders(), HttpStatus.OK);
+		
+		return new ResponseEntity<>("Success file upload " + multipartFile.getOriginalFilename(), new HttpHeaders(),
+				HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/api/upload/multi")
-	public ResponseEntity<?> multiFileUpload(MultipartFile[] uploadFiles) {
+	public ResponseEntity<?> multiFileUpload(
+			@RequestParam ("extraed") String extraField,
+			@RequestParam("files") MultipartFile[] uploadFiles) {
+		
+		logger.debug("Successful multi file upload");
+		
+		
 		
 		return null;
 	}

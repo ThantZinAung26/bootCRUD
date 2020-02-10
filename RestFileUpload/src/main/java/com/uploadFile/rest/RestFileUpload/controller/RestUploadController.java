@@ -27,7 +27,7 @@ import com.uploadFile.rest.RestFileUpload.model.UploadModel;
 public class RestUploadController {
 
 	private final Logger logger = LoggerFactory.getLogger(RestController.class);
-	private final String UPLOAD_FOLDER = "C:\\Users\\opmyanmar\\upload";
+	private final String UPLOAD_FOLDER = "C:\\Users\\opmyanmar\\upload\\";
 
 	@GetMapping("/api/all")
 	public String getAll() {
